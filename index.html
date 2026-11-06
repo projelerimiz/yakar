@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f8f4">
+<meta name="description" content="YAKAR atık robotları için kâğıt, plastik, cam, metal ve pil etkinlikleri.">
+<title>YAKAR · Atıkları Keşfet</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23dcece5'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='45' fill='%23263437'%3E♻%3C/text%3E%3C/svg%3E">
+<style>
+:root{--ink:#263437;--muted:#5e6c6d;--line:#dfe6e4;--paper:#fcfdfb;--font:"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--font)}a{color:inherit;-webkit-tap-highlight-color:transparent}a:focus-visible{outline:3px solid #1d6aa5;outline-offset:4px}.wrap{width:min(780px,calc(100% - 32px));margin-inline:auto}
+.topbar{border-bottom:1px solid var(--line);background:#fff}.topbar .wrap{height:58px;display:flex;align-items:center}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:19px;font-weight:850;letter-spacing:1px}.brand-mark{width:33px;height:33px;display:grid;place-items:center;border-radius:10px;background:#dcece5;font-size:24px;line-height:1}
+main{padding:38px 0 52px}.intro{margin-bottom:25px}.eyebrow{display:inline-block;color:#54746b;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.intro h1{font-size:clamp(31px,6vw,46px);line-height:1.1;letter-spacing:-1.5px;margin:9px 0 12px}.intro p{font-size:16px;color:var(--muted);margin:0;max-width:600px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{--bg:#eee;--edge:#aaa;--dark:#333;display:flex;align-items:center;gap:15px;min-height:122px;padding:18px 20px;text-decoration:none;background:var(--bg);border:1px solid var(--edge);border-radius:18px;transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 8px 22px #26343717}.card:active{transform:translateY(0)}.card svg{flex:none;width:62px;height:70px;fill:none;stroke:var(--dark);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.card-copy{min-width:0;flex:1}.card strong{display:block;color:var(--dark);font-size:20px;line-height:1.25}.card small{display:block;margin-top:3px;color:var(--dark);opacity:.8;font-size:13px}.arrow{flex:none;color:var(--dark);font-size:24px;font-weight:600}.paper{--bg:#e8f4ff;--edge:#b8d8f1;--dark:#225574}.plastic{--bg:#fff5cf;--edge:#f2db85;--dark:#655315}.glass{--bg:#e4f5e9;--edge:#aedcc0;--dark:#286348}.metal{--bg:#eaf1f4;--edge:#c6d9e0;--dark:#375664}.battery{--bg:#fff0eb;--edge:#efc7bf;--dark:#914843;grid-column:1/-1}
+.note{margin:25px 0 0;font-size:13px;color:var(--muted)}footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;padding:18px 0 26px}
+@media(max-width:620px){.wrap{width:calc(100% - 28px)}main{padding-top:28px}.intro{margin-bottom:21px}.intro p{font-size:14px}.grid{grid-template-columns:1fr;gap:10px}.card{min-height:95px;padding:12px 15px;border-radius:14px}.card svg{width:54px;height:60px}.card strong{font-size:18px}.battery{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">♻</span>YAKAR</a></div></header>
+<main class="wrap">
+  <div class="intro"><span class="eyebrow">Yaklaşınca Konuşan Atık Robotu</span><h1>Atıkları keşfet</h1><p>Bir atık türü seç; kısa bilgileri oku, oyunları oyna ve soruları yanıtla.</p></div>
+  <nav class="grid" aria-label="Atık türleri">
+    <a class="card paper" href="kagit/index.html"><svg viewBox="0 0 64 72" aria-hidden="true"><path d="M10 4h30l12 12v50H10zM40 4v12h12M18 28h26M18 37h26M18 46h22M18 55h18"/></svg><span class="card-copy"><strong>Kâğıt atık</strong><small>Defter, gazete, karton</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <a class="card plastic" href="plastik/index.html"><svg viewBox="0 0 64 72" aria-hidden="true"><path d="M25 3h14v9l7 10c3 4 3 6 3 11v28c0 5-3 8-8 8H23c-5 0-8-3-8-8V33c0-5 0-7 3-11l7-10zM23 3h18M20 33h24M20 54h24M20 60h24"/></svg><span class="card-copy"><strong>Plastik atık</strong><small>Plastik şişe ve ambalaj</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <a class="card glass" href="cam/index.html"><svg viewBox="0 0 64 72" aria-hidden="true"><path d="M19 11h26v9l7 8v33q0 8-8 8H20q-8 0-8-8V28l7-8zM17 11V4h30v7M18 34h28v25H18z"/></svg><span class="card-copy"><strong>Cam atık</strong><small>Şişe ve kavanoz</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <a class="card metal" href="metal/index.html"><svg viewBox="0 0 64 72" aria-hidden="true"><ellipse cx="32" cy="12" rx="21" ry="6"/><path d="M11 12v48c0 10 42 10 42 0V12M11 24h42M11 53h42"/><ellipse cx="32" cy="12" rx="10" ry="2"/></svg><span class="card-copy"><strong>Metal atık</strong><small>Konserve ve içecek kutusu</small></span><span class="arrow" aria-hidden="true">›</span></a>
+    <a class="card battery" href="pil/index.html"><svg viewBox="0 0 64 72" aria-hidden="true"><rect x="20" y="10" width="24" height="58" rx="4"/><path d="M27 10V4h10v6M28 28h8m-4-4v8M28 52h8"/></svg><span class="card-copy"><strong>Atık pil</strong><small>Kalem pil, dokuz volt pil, düğme pil</small></span><span class="arrow" aria-hidden="true">›</span></a>
+  </nav>
+  <p class="note">Bu sayfalardaki soru-cevap bölümleri önceden hazırlanmış bilgi yanıtlarını kullanır.</p>
+</main>
+<footer><div class="wrap">YAKAR · Çevre eğitimi için etkileşimli web içeriği</div></footer>
+</body>
+</html>

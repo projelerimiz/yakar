@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#65ba8d">
+<meta name="description" content="Cam atıkları tanı. Telefonda zıplama, atık ayırma ve soru-cevap oyunlarını oyna.">
+<title>Cam Atıklar · YAKAR</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f6cd36'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='45' fill='%232b2920'%3E♻%3C/text%3E%3C/svg%3E">
+<style>
+:root{--ink:#1d3c30;--muted:#5f766b;--yellow:#65ba8d;--yellow-dark:#4b9e75;--pale:#eaf8ef;--line:#d8eadf;--paper:#fbfffc;--radius:16px;--font:"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer;color:inherit}button:disabled{cursor:default}a{color:inherit}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:3px solid #327ba6;outline-offset:4px}[hidden]{display:none!important}img{display:block;max-width:100%}svg{display:block}.symbols{position:absolute;width:0;height:0;overflow:hidden}.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.wrap{width:min(760px,calc(100% - 32px));margin-inline:auto}.sr-only{position:absolute!important;clip:rect(0,0,0,0);clip-path:inset(50%);width:1px;height:1px;padding:0;overflow:hidden;white-space:nowrap;border:0}.skip{position:fixed;top:-90px;left:12px;z-index:30;padding:10px 18px;background:var(--ink);color:white;border-radius:8px}.skip:focus{top:8px}
+.topbar{position:sticky;top:0;z-index:15;background:#fbfffc;border-bottom:1px solid var(--line)}.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:850;letter-spacing:1.2px;font-size:19px}.brand span:first-child{display:grid;place-items:center;background:var(--yellow);width:32px;height:32px;border-radius:10px;font-size:24px;line-height:1}.type-label{font-size:12px;background:var(--pale);border:1px solid #b9dfc5;padding:4px 11px;border-radius:20px}
+.intro{text-align:center;padding:26px 0 0}h1{font-size:38px;letter-spacing:-1.4px;line-height:1.15;margin:0 0 19px;font-weight:800}.glass-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:510px;margin:0 auto 22px}.waste-example{margin:0;min-width:0;padding:12px 8px 10px;border:1px solid var(--line);border-radius:14px;background:#f7fff9}.waste-example svg{display:block;width:100%;height:128px;margin:0 auto 7px}.waste-example figcaption{font-size:12px;font-weight:650;line-height:1.4}.brief{scroll-margin-top:74px;text-align:left;background:var(--pale);border-left:4px solid var(--yellow);padding:15px 18px;border-radius:0 12px 12px 0}.brief p{margin:0;font-size:14px;line-height:1.7}.brief ul{margin:9px 0 0;padding-left:18px;font-size:13px;line-height:1.8}.brief li::marker{color:#318258}
+.games{padding:28px 0 25px}h2{font-size:23px;line-height:1.2;letter-spacing:-.6px;margin:0 0 15px}h3{font-size:19px;line-height:1.3;letter-spacing:-.35px;margin:0}.game-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px;background:#e4f1e8;border-radius:12px;margin-bottom:15px}.game-tab{position:relative;border:1px solid transparent;border-radius:9px;background:transparent;min-height:46px;padding:8px 6px;font-size:14px;font-weight:700}.game-tab[aria-selected="true"]{background:var(--yellow);border-color:#4ca478}.game-tab.done:after{content:" ✓";font-size:12px}.game-card,.mini-card{scroll-margin-top:75px;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:white}.game-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}.game-hud{display:flex;gap:13px;font-size:12px;color:var(--muted)}.game-hud b{color:var(--ink);font-variant-numeric:tabular-nums}.game-state{font-size:11px;color:var(--muted)}.canvas-shell{position:relative;border:1px solid #b3dcc0;border-radius:12px;overflow:hidden;background:var(--pale);isolation:isolate}.canvas-shell canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;touch-action:pan-y}.canvas-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:15px;text-align:center;background:#eaf8efdb;backdrop-filter:blur(2px)}.canvas-overlay strong{font-size:29px;letter-spacing:-.8px;line-height:1.15}.canvas-overlay p{font-size:13px;margin:0;max-width:290px;color:#4a6557}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;border-radius:10px;padding:11px 18px;min-height:46px;background:var(--yellow);color:var(--ink);text-decoration:none;font-size:14px;font-weight:750}.btn:hover:not(:disabled){background:var(--yellow-dark)}.btn:disabled{opacity:.45}.btn-small{font-size:13px;padding:8px 14px;min-height:44px}.touch-controls{display:grid;grid-template-columns:64px 64px minmax(0,1fr);gap:9px;margin-top:12px}.touch-controls button{display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid #b9d9c3;border-bottom:3px solid #93bca0;border-radius:11px;background:#edf8f0;height:56px;font-size:19px;touch-action:none;user-select:none;-webkit-user-select:none}.touch-controls .jump-button{justify-self:end;width:min(100%,190px);min-width:110px;background:var(--yellow);border-color:#449d70;font-weight:750;font-size:16px}.touch-controls button:active,.touch-controls button.pressed{background:#b4dfbd;border-bottom-width:1px;transform:translateY(1px)}.touch-controls .jump-button:active,.touch-controls .jump-button.pressed{background:#4eaa79}.game-utilities{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:11px}.utility-buttons{display:flex;gap:7px}.text-btn{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:white;font-size:12px}.text-btn:disabled{opacity:.4}.desktop-help{font-size:11px;color:var(--muted)}kbd{font:inherit;background:#edf6ef;border:1px solid #c5ddca;border-radius:4px;padding:2px 4px}.runner-message{margin:12px 0 0;padding:10px 12px;background:var(--pale);border-radius:9px;font-size:12px;line-height:1.6}.runner-message.success{background:#f4f5df}.bin-note{margin:11px 2px 0;color:var(--muted);font-size:11px}
+.progress-row{display:flex;justify-content:space-between;gap:10px;margin:13px 0 6px;color:var(--muted);font-size:12px}.progress-track{height:4px;background:#e2efe5;border-radius:10px;overflow:hidden}.progress-fill{width:0;height:100%;background:#55a878;border-radius:10px;transition:width .2s}.sort-object{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;background:var(--pale);border-radius:12px;min-height:185px;margin:19px 0 16px;padding:16px;text-align:center}.sort-object svg{width:60px;height:80px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:#726433}.sort-object strong{font-size:16px}.choice-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.choice-btn,.quiz-option{border:1px solid #c3decb;border-radius:10px;background:white;padding:13px;min-height:52px;font-size:14px}.choice-btn{font-weight:700}.choice-btn:hover:not(:disabled),.quiz-option:hover:not(:disabled){background:#edf9f0;border-color:#67b78a}.choice-btn.right,.quiz-option.right{background:#f1f6e2;border-color:#8aab54}.choice-btn.wrong,.quiz-option.wrong{background:#fff0e9;border-color:#d18d7a}.feedback{font-size:13px;line-height:1.7;background:var(--pale);padding:12px 14px;border-radius:10px;margin-top:13px}.feedback.good{background:#f1f6e2}.feedback.bad{background:#fff3ec}.mini-bottom{display:flex;justify-content:flex-end;margin-top:15px}.quiz-question{font-size:17px;line-height:1.6;font-weight:700;margin:20px 0 16px}.quiz-options{display:grid;gap:9px}.quiz-option{display:flex;align-items:center;gap:11px;text-align:left;line-height:1.5}.option-letter{display:grid;place-items:center;flex-shrink:0;min-width:27px;height:27px;font-size:12px;border-radius:8px;background:#e9f3eb;font-weight:750}.result-box{text-align:center;padding:30px 10px}.result-score{font-size:43px;line-height:1.2;font-weight:800;letter-spacing:-1px}.result-box h4{font-size:22px;margin:14px 0 7px}.result-box p{font-size:14px;color:var(--muted);margin:0 0 22px}.result-box .btn{margin-top:6px}
+.ask-section{padding-bottom:20px}.ask{border:1px solid var(--line);border-radius:12px;background:white}.ask>summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;padding:15px 17px;display:flex;align-items:center;justify-content:space-between;min-height:54px}.ask>summary::-webkit-details-marker{display:none}.ask>summary:after{content:"+";font-size:22px;line-height:1;font-weight:400}.ask[open]>summary:after{content:"−"}.question-card{padding:0 16px 18px}.question-card label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.question-input{display:flex;gap:8px}.question-input input{width:100%;min-width:0;border:1px solid #bad7c3;border-radius:10px;padding:12px;font-size:14px;color:var(--ink);background:#fbfffc}.question-input .btn{padding-inline:17px}.suggested-questions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.question-chip{border:1px solid #b6dec3;background:var(--pale);border-radius:20px;padding:8px 12px;min-height:41px;font-size:12px}.answer-box{margin-top:17px;padding-top:13px;border-top:1px solid var(--line)}.answer-heading{font-size:11px;font-weight:800;color:var(--muted)}.answer-box p{font-size:14px;line-height:1.8;margin:6px 0 8px}.source-inline{font-size:11px;color:var(--muted);text-underline-offset:3px}
+.footer{padding:18px 0 23px;border-top:1px solid var(--line)}.sources{font-size:12px;color:var(--muted)}.sources summary{cursor:pointer;min-height:34px;display:flex;align-items:center;gap:7px}.sources summary:before{content:"+"}.sources[open] summary:before{content:"−"}.sources ul{padding-left:17px;line-height:1.9}.sources a{text-underline-offset:3px}.mission-tabs{display:none}
+@media(max-width:600px){.wrap{width:calc(100% - 28px)}.topbar .wrap{height:52px}.brand{font-size:17px}.brand span:first-child{width:29px;height:29px;font-size:22px}.type-label{font-size:11px}.intro{padding-top:23px}h1{font-size:32px;margin-bottom:16px}.glass-gallery{gap:8px;margin-bottom:18px}.waste-example{padding:8px 4px 9px;border-radius:12px}.waste-example svg{height:106px;margin-bottom:5px}.waste-example figcaption{font-size:11px}.brief{padding:13px 14px}.brief p{font-size:13px}.brief ul{font-size:12px;line-height:1.9}.games{padding:24px 0 20px}h2{font-size:21px;margin-bottom:13px}.game-tabs{margin-bottom:12px}.game-tab{font-size:13px;min-height:48px;padding-inline:4px}.game-card,.mini-card{padding:13px;scroll-margin-top:64px}.game-heading{margin-bottom:11px;flex-wrap:wrap;gap:6px}h3{font-size:18px}.game-hud{font-size:12px;gap:14px}.game-state{font-size:10px}.canvas-shell canvas{aspect-ratio:8/7}.canvas-overlay strong{font-size:26px}.canvas-overlay p{font-size:12px;max-width:240px}.touch-controls{grid-template-columns:66px 66px minmax(0,1fr);gap:8px;margin-top:11px}.touch-controls button{height:58px}.touch-controls .jump-button{width:100%;max-width:155px;min-width:96px}.game-utilities{margin-top:9px}.desktop-help{display:none}.text-btn{font-size:12px;padding-inline:12px}.runner-message{font-size:12px}.bin-note{font-size:10px}.quiz-question{font-size:16px}.quiz-option,.choice-btn{font-size:13px;min-height:54px}.sort-object{min-height:173px}.sort-object strong{font-size:15px}.question-input input{font-size:13px}.question-chip{font-size:11px}.answer-box p{font-size:13px}.ask>summary{font-size:14px}.result-box{padding-block:25px}.result-box p{font-size:13px}}
+@media(max-width:340px){.touch-controls{grid-template-columns:56px 56px minmax(0,1fr);gap:7px}.touch-controls .jump-button{min-width:88px;font-size:14px}.game-hud{gap:10px;font-size:11px}.game-tab{font-size:12px}.brief ul{font-size:12px}.choice-btn{padding-inline:7px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+@media print{.topbar{position:static}.games,.ask-section{display:none}.intro{padding-top:15px}.sources{display:block}.waste-example svg{height:100px}}
+.recycling-examples{margin-top:14px;padding-top:13px;border-top:1px solid #c0e0ca}.recycling-examples h2{margin:0;font-size:15px;letter-spacing:0;line-height:1.5}.brief .example-list{margin-top:7px}.brief .example-note{margin-top:8px;font-size:11px;line-height:1.6;color:var(--muted)}.example-note a{text-underline-offset:2px}
+body{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22360%22%20height%3D%22320%22%20viewBox%3D%220%200%20360%20320%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2388b99e%22%20stroke-opacity%3D%22.34%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22translate%2828%2038%29%20rotate%28-14%2018%2028%29%20scale%28.70%29%22%3E%3Cpath%20d%3D%22M13%202h16v9l5%207v44H8V18l5-7zM11%202h20M8%2032h26M14%2039h14v15H14z%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28252%2030%29%20rotate%2813%2024%2024%29%20scale%28.72%29%22%3E%3Cpath%20d%3D%22M5%208h38v6l4%207v35H1V21l4-7zM4%208V3h40v5M5%2032h38M12%2038h24v13H12z%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28150%20178%29%20rotate%28-11%2017%2029%29%20scale%28.75%29%22%3E%3Cpath%20d%3D%22M13%203h8v10l8%209v37H5V22l8-9zM11%203h12M8%2033h18M11%2040h12v13H11z%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28294%20250%29%20rotate%2813%2019%2019%29%20scale%28.65%29%22%3E%3Cpath%20d%3D%22M3%205h32v7l3%205v29H0V17l3-5zM1%205V1h36v4M5%2025h28M8%2030h22v10H8z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:360px 320px;background-repeat:repeat}@media print{body{background-image:none}}
+.home-link{text-decoration:none;white-space:nowrap;font-weight:700}.home-link:hover{filter:brightness(.94)}
+</style>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+<svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-bottle" viewBox="0 0 48 64"><path d="M19 3h10v8l5 7c3 4 3 6 3 11v27c0 4-3 5-6 5H17c-3 0-6-1-6-5V29c0-5 0-7 3-11l5-7z"/><path d="M18 3h12M18 9h12M12 30h24M12 49h24M12 54h24"/><circle cx="20" cy="37" r="1.3" fill="currentColor"/><circle cx="28" cy="37" r="1.3" fill="currentColor"/><path d="M20 42q4 4 8 0"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3S5 11 5 15a7 7 0 0 0 14 0c0-4-7-12-7-12zM8 15a4 4 0 0 0 4 4"/></symbol>
+    <symbol id="i-bin" viewBox="0 0 24 24"><path d="M5 7h14l-1 14H6L5 7zM3 7h18M9 3h6l1 4M9 11v6m6-6v6"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3C6 2 2 9 6 16c7 5 14 0 14-13zM4 21l12-13M9 16v-5m0 5h5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8 14a7 7 0 1 1 8 0l-1 3H9z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM8 12l3 3 5-6"/></symbol>
+    <symbol id="i-can" viewBox="0 0 48 64"><ellipse cx="24" cy="11" rx="16" ry="5"/><path d="M8 11v44c0 7 32 7 32 0V11M8 22h32M8 47h32"/><ellipse cx="24" cy="11" rx="8" ry="2"/></symbol>
+    <symbol id="i-jar" viewBox="0 0 48 64"><path d="M14 7h20v7l5 5v36q0 6-6 6H15q-6 0-6-6V19l5-5zM12 7V3h24v4M13 30h22v18H13z"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 48 64"><path d="M15 9h18v52H15zM20 9V3h8v6M21 22h6m-3-3v6M21 48h6"/></symbol>
+    <symbol id="i-paper" viewBox="0 0 48 64"><path d="M9 4h23l8 9v47H9zM32 4v10h8M15 24h18M15 31h18M15 38h18M15 45h12"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 48 64"><ellipse cx="24" cy="24" rx="17" ry="7"/><path d="M7 24v16c0 10 34 10 34 0V24M12 29v13m6-11v13m6-12v13m6-14v13m6-15v13"/></symbol>
+  </defs></svg>
+<header class="topbar"><div class="wrap"><a class="brand" href="#baslangic" aria-label="YAKAR, sayfanın başına dön"><span aria-hidden="true">♻</span>YAKAR</a><a class="type-label home-link" href="../index.html" aria-label="YAKAR ana sayfasına dön">← Ana sayfa</a></div></header>
+<main id="icerik" class="wrap">
+  <section class="intro" id="baslangic" aria-labelledby="pageTitle">
+    <h1 id="pageTitle">Cam atıklar</h1>
+    <div class="glass-gallery" role="group" aria-label="Cam ambalaj atığı örnekleri">
+      <figure class="waste-example">
+        <svg viewBox="0 0 140 160" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="70" cy="149" rx="31" ry="5" fill="#dfeee4"/>
+          <path d="M60 19h20v21l12 19v77q0 11-12 11H60q-12 0-12-11V59l12-19z" fill="#b9e5cf" fill-opacity=".72" stroke="#478b69" stroke-width="2.6"/>
+          <rect x="58" y="10" width="24" height="12" rx="2" fill="#4d986e"/>
+          <path d="M53 66v56m4-81h26" stroke="#effff5" stroke-opacity=".9" stroke-width="5" stroke-linecap="round"/>
+          <path d="M50 82h40v34H50z" fill="#72bb91" fill-opacity=".62"/><path d="M61 99h18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        </svg><figcaption>Cam su şişesi</figcaption>
+      </figure>
+      <figure class="waste-example">
+        <svg viewBox="0 0 140 160" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="70" cy="149" rx="39" ry="5" fill="#dfeee4"/>
+          <path d="M42 45h56l8 14v75q0 13-13 13H47q-13 0-13-13V59z" fill="#d5f1df" fill-opacity=".85" stroke="#5d9c78" stroke-width="2.6"/>
+          <rect x="40" y="29" width="60" height="18" rx="4" fill="#6aaa77" stroke="#4e875f" stroke-width="2"/>
+          <path d="M42 65v59" stroke="#fafffd" stroke-width="5" stroke-linecap="round"/>
+          <rect x="48" y="77" width="44" height="45" rx="6" fill="#e78e8d" fill-opacity=".75"/>
+          <path d="M60 99h20" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        </svg><figcaption>Cam kavanoz</figcaption>
+      </figure>
+      <figure class="waste-example">
+        <svg viewBox="0 0 140 160" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="70" cy="149" rx="30" ry="5" fill="#dfeee4"/>
+          <path d="M62 18h16v25l12 18v76q0 10-10 10H60q-10 0-10-10V61l12-18z" fill="#bcd5a3" fill-opacity=".75" stroke="#567f5b" stroke-width="2.6"/>
+          <rect x="60" y="9" width="20" height="12" rx="2" fill="#7a9b60"/>
+          <path d="M55 69v58" stroke="#f5fff0" stroke-width="4" stroke-linecap="round"/>
+          <rect x="51" y="86" width="38" height="30" rx="4" fill="#f0e4a8"/><path d="M61 100h18" stroke="#8a9f65" stroke-width="3" stroke-linecap="round"/>
+        </svg><figcaption>Cam içecek şişesi</figcaption>
+      </figure>
+    </div>
+    <div class="brief" id="kesfet">
+      <p>Cam şişe ve kavanozlar, ayrı toplandığında yeniden cam üretiminde değerlendirilebilir.</p>
+      <ul><li>Cam ambalajın içini boşalt.</li><li>Bulunduğun yerdeki cam toplama etiketini kontrol et.</li><li>Depozitolu şişeyi iade ederek yeniden kullanılmasına katkı sağla.</li></ul>
+      <div class="recycling-examples" aria-labelledby="recyclingTitle">
+        <h2 id="recyclingTitle">Cam geri dönüşümü ne kazandırır?</h2>
+        <ul class="example-list">
+          <li><strong>1 ton cam atığın geri dönüşümü</strong> → yaklaşık 100 litre petrol tasarrufu sağlayabilir.</li>
+          <li><strong>Depozitolu cam şişe</strong> → temizlenerek yeniden kullanılabilir.</li>
+        </ul>
+        <p class="example-note">Tasarruf miktarı üretim koşullarına göre değişebilir. <a href="https://webdosya.csb.gov.tr/db/sifiratik/icerikler/k-tapc-k-2017-1-20180129130757.pdf" target="_blank" rel="noopener noreferrer">Kaynak: Çevre Yönetimi Genel Müdürlüğü</a></p>
+      </div>
+    </div>
+  </section>
+  <section class="games" id="oyna" aria-labelledby="playTitle">
+    <h2 id="playTitle">Oyunlar</h2>
+    <div class="game-tabs" id="gameTabs" role="tablist" aria-label="Oyun seç">
+      <button id="activityRunner" class="game-tab" type="button" role="tab" aria-selected="true" aria-controls="parkur" data-game="runner">Zıpla</button>
+      <button id="activitySort" class="game-tab" type="button" role="tab" aria-selected="false" aria-controls="ayir" tabindex="-1" data-game="sort">Atığı ayır</button>
+      <button id="activityQuiz" class="game-tab" type="button" role="tab" aria-selected="false" aria-controls="bilgi" tabindex="-1" data-game="quiz">Bilgi testi</button>
+    </div>
+    <span id="completionText" class="sr-only" aria-live="polite">0 / 3 görev tamamlandı</span>
+    <article class="game-card" id="parkur" role="tabpanel" aria-labelledby="activityRunner">
+      <div class="game-heading"><h3>Kutuya zıpla</h3><div class="game-hud"><span>Puan <b id="runnerScore">0</b></span><span>Etap <b id="runnerStage">1 / 3</b></span></div></div>
+      <div class="canvas-shell" id="gamePanel" tabindex="0" role="group" aria-label="Sol ve sağ oklarla hareket et. Boşluk, yukarı ok veya Zıpla düğmesiyle zıpla.">
+        <canvas id="gameCanvas" width="1920" height="840" aria-label="Cam şişeyi engellerden zıplatarak cam toplama kutusuna ulaştır.">Oyun için canvas destekleyen bir tarayıcı gerekir.</canvas>
+        <div class="canvas-overlay" id="runnerOverlay"><strong id="overlayTitle">Kutuya zıpla</strong><p id="overlayText">Engelleri geç ve cam kutusunun içine zıpla.</p><button id="startBtn" class="btn btn-main" type="button">▶ Başla</button></div>
+      </div>
+      <div class="touch-controls" aria-label="Dokunmatik oyun kontrolleri">
+        <button id="leftBtn" type="button" aria-label="Sola git">←</button>
+        <button id="rightBtn" type="button" aria-label="Sağa git">→</button>
+        <button id="jumpBtn" class="jump-button" type="button">↑ Zıpla</button>
+      </div>
+      <div class="game-utilities"><div class="utility-buttons"><button class="text-btn" id="pauseBtn" type="button" disabled>Duraklat</button><button class="text-btn" id="resetBtn" type="button">↻ Yeniden</button></div><span class="desktop-help"><kbd>←</kbd> <kbd>→</kbd> hareket · <kbd>Boşluk</kbd> zıpla</span><span class="sr-only" id="runnerState" role="status">Başlamaya hazır</span></div>
+      <p id="runnerMessage" class="runner-message" role="status" hidden></p>
+      <p class="bin-note">Oyunda cam kutusu yeşildir. Gerçekte kutu etiketini kontrol et.</p>
+    </article>
+    <article class="mini-card" id="ayir" role="tabpanel" aria-labelledby="activitySort" hidden>
+      <h3>Cam ambalaj mı?</h3>
+      <div id="sortBody"><div class="progress-row"><span id="sortCount">1 / 8 atık</span><span id="sortScore">0 doğru</span></div><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="sortProgress"></div></div><div class="sort-object"><svg aria-hidden="true"><use id="sortIcon" href="#i-jar"/></svg><strong id="sortObjectName">Boş cam kavanoz</strong></div><div class="choice-row"><button class="choice-btn" data-sort="true" type="button">Cam ambalaj</button><button class="choice-btn" data-sort="false" type="button">Farklı bir atık</button></div><div class="feedback" id="sortFeedback" role="status" hidden></div><div class="mini-bottom"><button class="btn btn-main btn-small" id="sortNext" type="button" disabled>Sonraki →</button></div></div>
+      <div id="sortResult" class="result-box" hidden><div class="result-score" id="sortFinalScore"></div><h4>Tamamlandı!</h4><p id="sortResultText"></p><button class="btn btn-main" id="sortReplay" type="button">↻ Yeniden oyna</button></div>
+    </article>
+    <article class="mini-card" id="bilgi" role="tabpanel" aria-labelledby="activityQuiz" hidden>
+      <h3>Bilgi testi</h3>
+      <div id="quizBody"><div class="progress-row"><span id="quizCount">1 / 8 soru</span><span id="quizScore">0 doğru</span></div><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="quizProgress"></div></div><p class="quiz-question" id="quizQuestion"></p><div class="quiz-options" id="quizOptions"></div><div class="feedback" id="quizFeedback" role="status" hidden></div><div class="mini-bottom"><button class="btn btn-main btn-small" id="quizNext" type="button" disabled>Sonraki →</button></div></div>
+      <div id="quizResult" class="result-box" hidden><div class="result-score" id="quizFinalScore"></div><h4>Tamamlandı!</h4><p id="quizResultText"></p><button class="btn btn-main" id="quizReplay" type="button">↻ Yeniden dene</button></div>
+    </article>
+  </section>
+  <section class="ask-section">
+    <details class="ask" id="sor"><summary>Cam hakkında soru sor</summary>
+      <div class="question-card"><form id="questionForm"><label for="questionInput">Sorun</label><div class="question-input"><input id="questionInput" type="text" maxlength="240" placeholder="Örneğin: Cam kavanozu nereye bırakmalıyım?" autocomplete="off" required><button class="btn btn-main" type="submit">Sor</button></div></form>
+      <div class="suggested-questions" aria-label="Örnek sorular"><button class="question-chip" data-question="Cam şişeler nasıl geri dönüştürülür?" type="button">Cam nasıl dönüşür?</button><button class="question-chip" data-question="Depozitolu şişe nedir?" type="button">Depozito nedir?</button><button class="question-chip" data-question="Cam kavanozu nereye bırakmalıyım?" type="button">Hangi kutu?</button></div>
+      <div class="answer-box" id="answerBox" role="status" aria-live="polite" hidden><div class="answer-heading">Yanıt</div><p id="answerText"></p><a class="source-inline" id="answerSource" href="https://cygm.csb.gov.tr/haberler/nisan-ayi-sifir-atik-temasi-cam-atiklar-304561" target="_blank" rel="noopener noreferrer" hidden>Kaynak ↗</a></div></div>
+    </details>
+  </section>
+</main>
+<footer class="footer"><div class="wrap"><details class="sources"><summary>Kaynaklar</summary><ul>
+  <li><a href="https://sifiratik.meb.gov.tr/" target="_blank" rel="noopener noreferrer">Millî Eğitim Bakanlığı · Cam atık örnekleri</a></li>
+  <li><a href="https://cygm.csb.gov.tr/haberler/nisan-ayi-sifir-atik-temasi-cam-atiklar-304561" target="_blank" rel="noopener noreferrer">Çevre Yönetimi Genel Müdürlüğü · Cam atıklar</a></li>
+  <li><a href="https://webdosya.csb.gov.tr/db/bolu/icerikler/atiklarin-geri-kazanimi-20180222082519.pdf" target="_blank" rel="noopener noreferrer">Çevre ve Şehircilik Bakanlığı · Cam ambalajların geri kazanımı</a></li>
+  <li><a href="https://webdosya.csb.gov.tr/db/sifiratik/icerikler/k-tapc-k-2017-1-20180129130757.pdf" target="_blank" rel="noopener noreferrer">Çevre Yönetimi Genel Müdürlüğü · Sıfır Atık kitapçığı</a></li>
+  <li><a href="https://webdosya.csb.gov.tr/db/batman/menu/sifir-atik-rehberi_20180911112642.pdf" target="_blank" rel="noopener noreferrer">Sıfır Atık rehberi · Cam kumbarasına uygun atıklar</a></li>
+</ul></details></div></footer>
+<div id="toast" class="sr-only" role="status" aria-live="polite"></div>
+<script>
+  'use strict';
+  /* YAKAR · Tek HTML dosyası. CSS ve JavaScript bu dosyanın içindedir.
+     Cam atık çizimleri HTML içinde SVG olarak yer alır.
+     Harici kütüphane, API anahtarı, izleme veya internet bağlantısı gerektirmez.
+     Platform oyunu, kullanıcının verdiği HTML'deki hareket, zıplama,
+     engel geçme ve çok etaplı geri dönüşüm görevi temel alınarak uyarlandı. */
+
+  const $ = id => document.getElementById(id);
+  const completedActivities = new Set();
+  let toastTimeout = 0;
+  function toast(text) {
+    $('toast').textContent = text;
+    $('toast').classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => $('toast').classList.remove('show'), 3200);
+  }
+  function finishActivity(id) {
+    if (completedActivities.has(id)) return;
+    completedActivities.add(id);
+    const el = $({runner:'activityRunner',sort:'activitySort',quiz:'activityQuiz'}[id]);
+    el.classList.add('done');
+    $('completionText').textContent = completedActivities.size + ' / 3 görev tamamlandı';
+    if (completedActivities.size === 3) toast('Üç etkinlik tamamlandı.');
+    else toast('Etkinlik tamamlandı.');
+  }
+
+  /* ——— CAM PLATFORM OYUNU ——— */
+  const canvas = $('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 960, H = 420, groundY = 354;
+  let viewWidth=960;
+  function resizeGameCanvas(){viewWidth=window.matchMedia('(max-width:600px)').matches?480:960;canvas.width=viewWidth*2;canvas.height=H*2;}
+  resizeGameCanvas();
+  const missions = {
+    jump:{name:'Geri dönüşüme atla',stages:3},
+    obstacles:{name:'Engelleri aş',stages:4},
+    goal:{name:'Uzun yolculuk',stages:5}
+  };
+  const player = {x:48,y:groundY-62,w:35,h:62,vx:0,vy:0,grounded:true};
+  const goal = {x:850,y:265,w:68,h:89};
+  let mission='jump', phase='idle', stage=1, runnerScore=0, raf=0, lastTime=0;
+  let keys = new Set(), touches = new Map(), jumpBuffer=0, coyote=.10;
+  let obstacles=[], stars=[], hitCooldown=0, phaseTime=0, clock=0;
+  let wonStars=0, sparks=[];
+  const stageTips=[
+    'Cam ambalajın içini boşaltıp uygun kutuya bırak.',
+    'Cam şişeler geri dönüşümde yeniden cam üretimine katılabilir.',
+    'Depozitolu cam şişeler temizlenerek tekrar kullanılabilir.',
+    'Camı diğer atıklardan ayrı tut ve kutu etiketine bak.',
+    'Görev tamam! Şimdi gerçek hayatta da cam atıkları tanıyabilirsin.'
+  ];
+  function roundRect(x,y,w,h,r,fill,stroke) {
+    r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+    if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.5;ctx.stroke();}
+  }
+  function intersects(a,b) {return a.x<b.x+b.w && a.x+a.w>b.x && a.y<b.y+b.h && a.y+a.h>b.y;}
+  function createStageObstacles() {
+    const count=Math.min(5,2+stage+(mission==='obstacles'?1:0));
+    const start=count===3?245:count===4?210:180;
+    const spacing=count===3?185:count===4?150:136;
+    obstacles=Array.from({length:count},(_,i)=>({x:start+i*spacing,y:groundY-(30+((i+stage)%3)*7),w:31,h:30+((i+stage)%3)*7,passed:false}));
+    stars=obstacles.map((o,i)=>({x:o.x+15,y:o.y-37,w:21,h:21,collected:false,offset:i*.8}));
+  }
+  function placePlayer() {Object.assign(player,{x:48,y:groundY-62,vx:0,vy:0,grounded:true});coyote=.10;jumpBuffer=0;hitCooldown=0;}
+  function releaseControls() {keys.clear();touches.clear();document.querySelectorAll('.touch-controls button').forEach(b=>b.classList.remove('pressed'));jumpBuffer=0;}
+  function syncRunnerHud() {$('runnerScore').textContent=runnerScore;$('runnerStage').textContent=stage+' / '+missions[mission].stages;}
+  function setMessage(text,success=false) {$('runnerMessage').textContent=text;$('runnerMessage').hidden=!text;$('runnerMessage').classList.toggle('success',success);}
+  function showOverlay(title,text,button) {$('overlayTitle').textContent=title;$('overlayText').textContent=text;$('overlayText').hidden=!text;$('startBtn').textContent=button;$('runnerOverlay').hidden=false;}
+  function resetGame() {
+    cancelAnimationFrame(raf);raf=0;phase='idle';stage=1;runnerScore=0;clock=0;wonStars=0;sparks=[];releaseControls();placePlayer();createStageObstacles();syncRunnerHud();
+    $('runnerState').textContent='Başlamaya hazır';$('pauseBtn').disabled=true;$('pauseBtn').textContent='Duraklat';
+    showOverlay('Kutuya zıpla','Engelleri geç ve cam kutusunun içine zıpla.','▶ Başla');
+    setMessage('');draw();
+  }
+  function scheduleLoop(){cancelAnimationFrame(raf);lastTime=performance.now();raf=requestAnimationFrame(gameLoop);}
+  function startGame() {
+    if(phase==='playing'||phase==='clearing')return;
+    if(phase==='won')resetGame();
+    phase='playing';$('runnerOverlay').hidden=true;$('pauseBtn').disabled=false;$('pauseBtn').textContent='Duraklat';$('runnerState').textContent='Oynanıyor';
+    setMessage('');
+    $('gamePanel').focus({preventScroll:true});if(window.matchMedia('(max-width:600px)').matches)$('parkur').scrollIntoView({block:'start',behavior:'instant'});scheduleLoop();
+  }
+  function pauseGame() {
+    if(phase==='paused'){startGame();return;}
+    if(phase!=='playing')return;
+    phase='paused';cancelAnimationFrame(raf);raf=0;releaseControls();$('runnerState').textContent='Mola';$('pauseBtn').textContent='Devam et';
+    showOverlay('Duraklatıldı','','▶ Devam et');draw();
+  }
+  function chooseMission(id) {
+    if(!missions[id])return;mission=id;
+    document.querySelectorAll('[data-mission]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mission===id)));
+    resetGame();
+  }
+  function requestJump(){if(phase==='idle')startGame();if(phase==='playing')jumpBuffer=.15;}
+  function completeStage() {
+    if(phase!=='playing')return;
+    runnerScore+=35;phase='clearing';phaseTime=0;player.vx=0;player.vy=0;
+    setMessage(stageTips[(stage-1)%stageTips.length],true);$('runnerState').textContent='Etap tamamlandı';syncRunnerHud();
+    sparks=Array.from({length:18},(_,i)=>({x:goal.x+goal.w/2,y:goal.y+20,vx:(i%2?-1:1)*(40+i*8),vy:-120-(i%4)*38,life:.8,color:['#c9e9ae','#85c997','#72b09c'][i%3]}));
+  }
+  function update(dt) {
+    clock+=dt;hitCooldown=Math.max(0,hitCooldown-dt);jumpBuffer=Math.max(0,jumpBuffer-dt);
+    if(phase==='clearing'){
+      phaseTime+=dt;player.y+=(goal.y+goal.h-player.h+15-player.y)*Math.min(1,dt*8);
+      sparks.forEach(s=>{s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=350*dt;s.life-=dt;});
+      if(phaseTime>.95){
+        if(stage<missions[mission].stages){stage++;placePlayer();createStageObstacles();phase='playing';syncRunnerHud();$('runnerState').textContent='Oynanıyor';setMessage('Etap '+stage+' / '+missions[mission].stages);}
+        else{phase='won';runnerScore+=50;syncRunnerHud();releaseControls();$('runnerState').textContent='Görev tamam!';$('pauseBtn').disabled=true;showOverlay('Tamamlandı!',runnerScore+' puan · '+missions[mission].stages+' etap','↻ Yeniden oyna');setMessage('Tüm etapları tamamladın.',true);finishActivity('runner');}
+      }return;
+    }
+    if(phase!=='playing')return;
+    const touchValues=[...touches.values()];
+    const left=keys.has('ArrowLeft')||keys.has('KeyA')||touchValues.includes('left');
+    const right=keys.has('ArrowRight')||keys.has('KeyD')||touchValues.includes('right');
+    const previousX=player.x, previousBottom=player.y+player.h;
+    coyote=player.grounded?.10:Math.max(0,coyote-dt);
+    if(jumpBuffer>0&&coyote>0){player.vy=-585;player.grounded=false;coyote=0;jumpBuffer=0;}
+    player.vx=((right?1:0)-(left?1:0))*225;
+    player.x=Math.max(0,Math.min(W-player.w,player.x+player.vx*dt));
+    player.vy+=1500*dt;player.y+=player.vy*dt;player.grounded=false;
+    if(player.y+player.h>=groundY){player.y=groundY-player.h;player.vy=0;player.grounded=true;}
+    for(const ob of obstacles){
+      if(intersects(player,ob)){
+        if(player.vy>=0&&previousBottom<=ob.y+10){player.y=ob.y-player.h;player.vy=0;player.grounded=true;}
+        else{
+          if(previousX+player.w<=ob.x+10)player.x=ob.x-player.w-.1;
+          else if(previousX>=ob.x+ob.w-10)player.x=ob.x+ob.w+.1;
+          else player.x=previousX;
+          if(hitCooldown<=0){runnerScore=Math.max(0,runnerScore-3);hitCooldown=.8;setMessage('Engele takıldın. Biraz daha erken zıpla.');syncRunnerHud();}
+        }
+      }
+      if(!ob.passed&&player.x>ob.x+ob.w){ob.passed=true;runnerScore+=15;syncRunnerHud();}
+    }
+    for(const star of stars){if(!star.collected&&intersects(player,{x:star.x-11,y:star.y-11,w:22,h:22})){star.collected=true;wonStars++;runnerScore+=10;syncRunnerHud();}}
+    const centered=player.x+player.w/2>goal.x+8&&player.x+player.w/2<goal.x+goal.w-8;
+    const landing=player.vy>0&&previousBottom<=goal.y+10&&player.y+player.h>=goal.y;
+    if(centered&&landing&&obstacles.every(o=>o.passed)){player.y=goal.y-player.h;completeStage();return;}
+    if(intersects(player,goal)&&!(centered&&previousBottom<goal.y+4)){
+      if(previousX+player.w<=goal.x+10||player.x<goal.x)player.x=goal.x-player.w-.1;
+      else player.x=goal.x+goal.w+.1;
+      setMessage('Kutuya girmek için zıpla.');
+    }
+  }
+  function drawStar(x,y,size,color){ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?size*.45:size;const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.closePath();ctx.fillStyle=color;ctx.fill();}
+  function drawBackground(){
+    ctx.fillStyle='#e6f6ec';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#d4ecd9';ctx.beginPath();ctx.arc(775,73,32,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#c3e2cb';ctx.beginPath();ctx.moveTo(0,groundY);ctx.bezierCurveTo(80,210,210,230,330,groundY);ctx.bezierCurveTo(460,230,560,205,700,groundY);ctx.lineTo(W,groundY);ctx.lineTo(0,groundY);ctx.fill();
+    ctx.fillStyle='#add7b8';ctx.beginPath();ctx.moveTo(570,groundY);ctx.bezierCurveTo(710,220,845,235,W,groundY);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#fffdf1';for(const c of [[105,63,1],[379,97,.75],[610,48,.6]]){ctx.save();ctx.translate(c[0],c[1]);ctx.scale(c[2],c[2]);ctx.beginPath();ctx.arc(0,0,16,0,Math.PI*2);ctx.arc(19,-9,23,0,Math.PI*2);ctx.arc(43,0,17,0,Math.PI*2);ctx.fill();ctx.restore();}
+    ctx.fillStyle='#82b895';ctx.fillRect(0,groundY,W,6);ctx.fillStyle='#e7f1e9';ctx.fillRect(0,groundY+6,W,H-groundY-6);
+    ctx.strokeStyle='#bdd8c5';ctx.lineWidth=1;for(let x=8;x<W;x+=29){ctx.beginPath();ctx.moveTo(x,groundY+24);ctx.lineTo(x+9,groundY+24);ctx.stroke();}
+  }
+  function drawGoal(){
+    ctx.save();ctx.globalAlpha=.15;ctx.fillStyle='#24482c';ctx.beginPath();ctx.ellipse(goal.x+35,groundY+4,43,8,0,0,Math.PI*2);ctx.fill();ctx.restore();
+    roundRect(goal.x,goal.y+8,goal.w,goal.h-8,9,'#5fb481','#368d63');
+    ctx.fillStyle='#398e64';ctx.fillRect(goal.x+goal.w-9,goal.y+13,7,goal.h-20);
+    roundRect(goal.x-5,goal.y-1,goal.w+10,12,5,'#76c398','#43976b');roundRect(goal.x+6,goal.y,goal.w-12,6,3,'#2f704d');
+    ctx.fillStyle='#f0fff4';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 33px "Segoe UI Symbol",sans-serif';ctx.fillText('♻',goal.x+goal.w/2,goal.y+39);ctx.font='bold 10px "Trebuchet MS",sans-serif';ctx.fillText('CAM',goal.x+goal.w/2,goal.y+68);
+    ctx.fillStyle='#2e7350';ctx.beginPath();ctx.moveTo(goal.x+goal.w/2,goal.y-10);ctx.lineTo(goal.x+goal.w/2-6,goal.y-19);ctx.lineTo(goal.x+goal.w/2+6,goal.y-19);ctx.fill();
+  }
+  function drawPlayer(){
+    const blink=hitCooldown>0&&Math.floor(clock*15)%2===0;
+    ctx.save();ctx.globalAlpha=blink?.5:1;
+    ctx.fillStyle='#2a5b4020';ctx.beginPath();ctx.ellipse(player.x+player.w/2,groundY+3,21,5,0,0,Math.PI*2);ctx.fill();
+    const x=player.x,y=player.y;
+    roundRect(x+11,y,13,8,2,'#4a986d','#397a58');
+    ctx.beginPath();ctx.moveTo(x+11,y+8);ctx.lineTo(x+24,y+8);ctx.lineTo(x+29,y+20);ctx.quadraticCurveTo(x+35,y+26,x+35,y+32);ctx.lineTo(x+35,y+57);ctx.quadraticCurveTo(x+35,y+62,x+29,y+62);ctx.lineTo(x+6,y+62);ctx.quadraticCurveTo(x,y+62,x,y+57);ctx.lineTo(x,y+32);ctx.quadraticCurveTo(x,y+26,x+6,y+20);ctx.closePath();ctx.fillStyle='#a9ddc4';ctx.fill();ctx.strokeStyle='#3b8b67';ctx.lineWidth=1.8;ctx.stroke();
+    roundRect(x+4,y+30,27,20,3,'#e4f7ea');ctx.fillStyle='#245942';ctx.beginPath();ctx.arc(x+11,y+36,2,0,Math.PI*2);ctx.arc(x+24,y+36,2,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#245942';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(x+17.5,y+41,4,0,Math.PI);ctx.stroke();
+    ctx.strokeStyle='#f4fff8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+6,y+24);ctx.lineTo(x+6,y+28);ctx.stroke();
+    ctx.strokeStyle='#6fb28e';ctx.lineWidth=1;for(const off of [53,57]){ctx.beginPath();ctx.moveTo(x+4,y+off);ctx.lineTo(x+31,y+off);ctx.stroke();}ctx.restore();
+  }
+  function draw(){
+    ctx.setTransform(2,0,0,2,0,0);ctx.clearRect(0,0,viewWidth,H);
+    const cameraX=Math.max(0,Math.min(W-viewWidth,player.x+player.w/2-viewWidth*.30));
+    ctx.save();ctx.translate(-cameraX,0);drawBackground();
+    for(const ob of obstacles){roundRect(ob.x,ob.y,ob.w,ob.h,5,'#ba8d67','#a87a57');ctx.fillStyle='#d7b08e';ctx.fillRect(ob.x+3,ob.y+3,ob.w-6,5);ctx.strokeStyle='#986f50';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ob.x+ob.w/2,ob.y+4);ctx.lineTo(ob.x+ob.w/2,ob.y+ob.h-3);ctx.stroke();if(ob.passed){ctx.fillStyle='#547f46';ctx.font='bold 14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✓',ob.x+ob.w/2,ob.y-11);}}
+    for(const s of stars)if(!s.collected)drawStar(s.x,s.y+Math.sin(clock*2+s.offset)*2,11,'#96cb83');
+    drawGoal();drawPlayer();
+    if(phase==='clearing'){sparks.filter(s=>s.life>0).forEach(s=>{ctx.fillStyle=s.color;ctx.fillRect(s.x,s.y,5,7);});}
+    ctx.restore();
+    
+  }
+  function gameLoop(timestamp){
+    const dt=Math.max(0,Math.min((timestamp-lastTime)/1000,.028));lastTime=timestamp;
+    update(dt);draw();raf=(phase==='playing'||phase==='clearing')?requestAnimationFrame(gameLoop):0;
+  }
+  $('startBtn').addEventListener('click',startGame);$('pauseBtn').addEventListener('click',pauseGame);$('resetBtn').addEventListener('click',resetGame);
+  document.querySelectorAll('[data-mission]').forEach(b=>b.addEventListener('click',()=>chooseMission(b.dataset.mission)));
+  $('gamePanel').addEventListener('keydown',e=>{
+    if(e.target.closest('button,input'))return;
+    if(['ArrowLeft','ArrowRight','ArrowUp','Space','KeyA','KeyD','KeyW','KeyP'].includes(e.code)){
+      e.preventDefault();
+      if(e.code==='KeyP'){if(!e.repeat)pauseGame();return;}
+      keys.add(e.code);
+      if(['Space','ArrowUp','KeyW'].includes(e.code)&&!e.repeat)requestJump();
+    }
+  });
+  window.addEventListener('keyup',e=>keys.delete(e.code));
+  function bindTouch(id,direction){
+    const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);if(phase==='idle')startGame();if(phase!=='playing')return;touches.set(e.pointerId,direction);b.classList.add('pressed');if(direction==='jump')requestJump();});
+    const end=e=>{touches.delete(e.pointerId);b.classList.remove('pressed');};b.addEventListener('pointerup',end);b.addEventListener('pointercancel',end);b.addEventListener('lostpointercapture',end);
+  }
+  bindTouch('leftBtn','left');bindTouch('rightBtn','right');bindTouch('jumpBtn','jump');
+  window.addEventListener('blur',()=>{releaseControls();if(phase==='playing')pauseGame();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){releaseControls();if(phase==='playing')pauseGame();}});
+  window.addEventListener('resize',()=>{resizeGameCanvas();draw();});
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{if(!entries[0].isIntersecting&&phase==='playing')pauseGame();},{threshold:.05}).observe($('gamePanel'));
+  resetGame();
+
+  /* ——— ATIK DEDEKTİFİ ——— */
+  const sortItems=[
+    {name:'Boş cam kavanoz',icon:'jar',glass:true,why:'Evet, cam kavanoz bir cam ambalajdır. İçini boşaltıp cam toplama noktasına bırak.'},
+    {name:'Plastik su şişesi',icon:'bottle',glass:false,why:'Bu şişe plastiktir. Cam toplama kutusuna bırakılmaz.'},
+    {name:'Cam içecek şişesi',icon:'jar',glass:true,why:'Doğru! Cam içecek şişesi cam ambalajdır.'},
+    {name:'Alüminyum içecek kutusu',icon:'can',glass:false,why:'Alüminyum kutu metal ambalajdır; cam atık değildir.'},
+    {name:'Boş reçel kavanozu',icon:'jar',glass:true,why:'Evet, reçel kavanozunun gövdesi camdır. Önce içini boşalt.'},
+    {name:'Kullanılmış pil',icon:'battery',glass:false,why:'Pil ayrı bir atık türüdür. Atık pil toplama kutusuna bırakılır.'},
+    {name:'Cam su şişesi',icon:'jar',glass:true,why:'Doğru! Cam şişe, cam ambalaj örneklerindendir.'},
+    {name:'Eski defter',icon:'paper',glass:false,why:'Defter kâğıt atıktır; cam ambalaj kutusuna bırakılmaz.'}
+  ];
+  let sortIndex=0,sortCorrect=0,sortAnswered=false;
+  function renderSort(){
+    sortAnswered=false;const item=sortItems[sortIndex];$('sortCount').textContent=(sortIndex+1)+' / '+sortItems.length+' atık';$('sortScore').textContent=sortCorrect+' doğru';$('sortProgress').style.width=(sortIndex/sortItems.length*100)+'%';$('sortObjectName').textContent=item.name;$('sortIcon').setAttribute('href','#i-'+item.icon);$('sortNext').disabled=true;$('sortNext').textContent=sortIndex===sortItems.length-1?'Sonucunu gör →':'Sıradaki atık →';$('sortFeedback').className='feedback';$('sortFeedback').textContent='';$('sortFeedback').hidden=true;
+    document.querySelectorAll('[data-sort]').forEach(b=>{b.disabled=false;b.className='choice-btn';});
+  }
+  function answerSort(value,button){
+    if(sortAnswered)return;sortAnswered=true;const item=sortItems[sortIndex],right=value===item.glass;if(right)sortCorrect++;
+    document.querySelectorAll('[data-sort]').forEach(b=>{b.disabled=true;if((b.dataset.sort==='true')===item.glass)b.classList.add('right');});if(!right)button.classList.add('wrong');$('sortScore').textContent=sortCorrect+' doğru';$('sortProgress').style.width=((sortIndex+1)/sortItems.length*100)+'%';$('sortFeedback').className='feedback '+(right?'good':'bad');$('sortFeedback').hidden=false;$('sortFeedback').textContent=(right?'✓ ':'')+item.why;$('sortNext').disabled=false;
+  }
+  document.querySelectorAll('[data-sort]').forEach(b=>b.addEventListener('click',()=>answerSort(b.dataset.sort==='true',b)));
+  $('sortNext').addEventListener('click',()=>{if(!sortAnswered)return;if(sortIndex<sortItems.length-1){sortIndex++;renderSort();}else{$('sortBody').hidden=true;$('sortResult').hidden=false;$('sortFinalScore').textContent=sortCorrect+' / '+sortItems.length;$('sortResultText').textContent=sortCorrect===sortItems.length?'Cam ambalajları tanıdın. Şimdi gerçek hayatta da kutu etiketine bak!':'Her atığın ayrı bir yolculuğu var. Yeni bir turda ipuçlarını yeniden keşfedebilirsin.';finishActivity('sort');}});
+  $('sortReplay').addEventListener('click',()=>{sortIndex=0;sortCorrect=0;$('sortBody').hidden=false;$('sortResult').hidden=true;renderSort();});renderSort();
+
+  /* ——— BİLGİ YARIŞMASI ——— */
+  const quizQuestions=[
+    {q:'Boş cam şişeyi ilk olarak ne yapmalısın?',options:['İçini boşaltıp uygun toplama noktasına bırakmak','Doğaya atmak','İçine pil doldurmak'],correct:0,why:'Cam ambalajı boşaltıp ayrı biriktirmek geri dönüşüme katılmasına yardımcı olur.'},
+    {q:'Hangisi cam ambalaj örneğidir?',options:['Alüminyum içecek kutusu','Cam reçel kavanozu','Plastik şişe'],correct:1,why:'Reçel kavanozunun gövdesi camdır.'},
+    {q:'Cam üretiminde kullanılan temel malzemelerden biri hangisidir?',options:['Kum','Pamuk','Pil'],correct:0,why:'Cam üretiminde kum, soda ve kireç kullanılır.'},
+    {q:'Depozitolu cam şişeye ne yapılabilir?',options:['Doğaya bırakılır','Temizlenerek tekrar kullanılır','Kâğıt yapılır'],correct:1,why:'Depozitolu cam şişeler temizlenerek yeniden kullanılabilir.'},
+    {q:'Toplanan cam ambalajlar geri dönüşümde nasıl değerlendirilir?',options:['Kırılıp eritilerek yeni cam yapılabilir','Pilin içine konur','Yere gömülür'],correct:0,why:'Uygun cam atıklar kırılıp eritilerek yeni cam ürünlerin yapımında kullanılabilir.'},
+    {q:'Cam toplama kutusunu nasıl seçersin?',options:['Üzerindeki atık türü etiketine bakarak','Sadece boyuna bakarak','Rastgele bir kutu seçerek'],correct:0,why:'Toplama düzeni bulunduğun yere göre değişebilir; kutu etiketine bak.'},
+    {q:'Porselen tabak cam ambalaj kutusuna bırakılır mı?',options:['Evet, her zaman','Hayır, porselen cam ambalaj değildir','Yalnızca rengi yeşilse'],correct:1,why:'Porselen, cam şişe ve kavanozlarla aynı ambalaj türü değildir.'},
+    {q:'YAKAR robotuyla tanıştın. Gerçek cam atığını ne yapmalısın?',options:['Robotun içine bırakmalıyım','Uygun cam toplama noktasına bırakmalıyım','Robotun yanına bırakmalıyım'],correct:1,why:'YAKAR eğitim materyalidir. Gerçek atıklar uygun toplama noktalarına bırakılır.'}
+  ];
+  let quizIndex=0,quizCorrect=0,quizAnswered=false;
+  function renderQuiz(){
+    quizAnswered=false;const q=quizQuestions[quizIndex];$('quizCount').textContent=(quizIndex+1)+' / '+quizQuestions.length+' soru';$('quizScore').textContent=quizCorrect+' doğru';$('quizProgress').style.width=(quizIndex/quizQuestions.length*100)+'%';$('quizQuestion').textContent=q.q;$('quizOptions').replaceChildren();$('quizFeedback').className='feedback';$('quizFeedback').textContent='';$('quizFeedback').hidden=true;$('quizNext').disabled=true;$('quizNext').textContent=quizIndex===quizQuestions.length-1?'Sonucunu gör →':'Sonraki soru →';
+    q.options.forEach((option,i)=>{const button=document.createElement('button');button.type='button';button.className='quiz-option';const letter=document.createElement('span');letter.className='option-letter';letter.textContent=String.fromCharCode(65+i);letter.setAttribute('aria-hidden','true');const text=document.createElement('span');text.textContent=option;button.append(letter,text);button.addEventListener('click',()=>answerQuiz(i,button));$('quizOptions').append(button);});
+  }
+  function answerQuiz(index,button){
+    if(quizAnswered)return;quizAnswered=true;const q=quizQuestions[quizIndex],right=index===q.correct;if(right)quizCorrect++;
+    [...$('quizOptions').children].forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('right');});if(!right)button.classList.add('wrong');$('quizScore').textContent=quizCorrect+' doğru';$('quizProgress').style.width=((quizIndex+1)/quizQuestions.length*100)+'%';$('quizFeedback').className='feedback '+(right?'good':'bad');$('quizFeedback').hidden=false;$('quizFeedback').textContent=(right?'✓ ':'')+q.why;$('quizNext').disabled=false;
+  }
+  $('quizNext').addEventListener('click',()=>{if(!quizAnswered)return;if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}else{$('quizBody').hidden=true;$('quizResult').hidden=false;$('quizFinalScore').textContent=quizCorrect+' / '+quizQuestions.length;$('quizResultText').textContent=quizCorrect>=6?'Camın yolculuğunu öğrendin. Bir bilgiyi arkadaşınla paylaş!':'Soruları tamamladın! Açıklamaları okuyup bir tur daha deneyebilirsin.';finishActivity('quiz');}});
+  $('quizReplay').addEventListener('click',()=>{quizIndex=0;quizCorrect=0;$('quizBody').hidden=false;$('quizResult').hidden=true;renderQuiz();});renderQuiz();
+
+  /* ——— YEREL SORU-CEVAP REHBERİ ———
+     Yanıtlar sınırlı, kaynaklı bir bilgi bankasından seçilir. Üretken yapay zekâ
+     kullanıldığı iddia edilmez; sorular hiçbir sunucuya gönderilmez. */
+  const sources={meb:'https://sifiratik.meb.gov.tr/',glass:'https://cygm.csb.gov.tr/haberler/nisan-ayi-sifir-atik-temasi-cam-atiklar-304561',recycle:'https://webdosya.csb.gov.tr/db/bolu/icerikler/atiklarin-geri-kazanimi-20180222082519.pdf',savings:'https://webdosya.csb.gov.tr/db/sifiratik/icerikler/k-tapc-k-2017-1-20180129130757.pdf',guide:'https://webdosya.csb.gov.tr/db/batman/menu/sifir-atik-rehberi_20180911112642.pdf'};
+  const answers=[
+    {keys:['depozito','depozitolu','iade','tekrar kullan'],text:'Depozitolu cam şişeler toplanıp temizlenerek yeniden kullanılabilir. Şişenin üzerindeki iade işaretini ve bulunduğun yerdeki uygulamayı kontrol et.',source:'recycle'},
+    {keys:['neden yapil','ham madde','kum','soda','kirec','cam nasil uretil'],text:'Cam üretiminde kum, soda ve kireç kullanılır. Bu malzemeler yüksek sıcaklıkta eritilir.',source:'meb'},
+    {keys:['nasil geri donus','ne uretil','neye donus','yeniden cam','erit'],text:'Ayrı toplanan uygun cam ambalajlar kırılıp eritilerek yeni cam ürünlerin üretiminde kullanılabilir.',source:'recycle'},
+    {keys:['nereye','hangi kutu','yesil','renk','kumbara','nasil ayir','nerede toplan'],text:'Cam şişe ve kavanozları boşaltıp bulunduğun yerde cam için belirtilen toplama kutusuna bırak. Kutunun etiketini kontrol et.',source:'glass'},
+    {keys:['porselen','seramik','tabak'],text:'Porselen ve seramik, cam şişe ve kavanozlarla aynı ambalaj türü değildir. Cam ambalaj kumbarasına bırakma; yerel toplama bilgisini kontrol et.',source:'guide'},
+    {keys:['ne kadar','1 ton','petrol','tasarruf','enerji'],text:'Çevre Yönetimi Genel Müdürlüğünün kitapçığına göre bir ton cam atığın geri dönüştürülmesi, yaklaşık yüz litre petrol tasarrufu sağlayabilir. Bu değer üretim koşullarına göre değişebilir.',source:'savings'},
+    {keys:['sise','siseyi','kavanoz','bosalt','temiz','kapak'],text:'Cam şişe ve kavanozların içini boşaltıp ayrı biriktir. Kapak ve hazırlama ayrıntılarında bulunduğun yerdeki toplama sisteminin yönergelerine uy.',source:'glass'},
+    {keys:['kirik','kiril','kesik','keskin'],text:'Kırık cam keskin olabilir. Elle toplamadan önce bir yetişkinden yardım iste ve bulunduğun yerdeki güvenli toplama yönergesini izle.',source:null},
+    {keys:['pil','batarya','plastik','metal','kagit','defter'],text:'Pil, plastik, metal ve kâğıt atıklar cam ambalajdan farklıdır. Her birini bulunduğun yerdeki uygun toplama noktasına bırak.',source:'meb'},
+    {keys:['geri donusum nedir','geri donusum','donusum'],text:'Geri dönüşüm, uygun atıkların ayrı toplanıp işlenerek yeniden üretimde değerlendirilmesidir. Cam ambalajlar da bu şekilde yeniden cam üretimine katılabilir.',source:'glass'},
+    {keys:['yakar','robot','kimsin','icine'],text:'YAKAR, atıkları tanıtmak için hazırlanmış bir eğitim materyalidir. Cam atıkları robotun içine değil, uygun gerçek toplama kutusuna bırakmalısın.',source:null}
+  ];
+  function normalize(text){return text.toLocaleLowerCase('tr-TR').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();}
+  function answerQuestion(question){
+    const q=normalize(question);if(!q)return;$('answerBox').hidden=false;
+    let best=null,bestScore=0;
+    // Avoid treating ceramic or another waste type as glass packaging.
+    const specific=/\b(porselen|seramik|tabak)\b/.test(q)?4:
+      /\b(pil|batarya|plastik|metal|kagit|defter)\b/.test(q)?8:null;
+    if(specific!==null)best=answers[specific];
+    if(!best)for(const answer of answers){let score=0;for(const keyword of answer.keys){const k=normalize(keyword);if(q.includes(k))score+=k.split(' ').length*2+Math.min(k.length,15)/10;}if(score>bestScore){best=answer;bestScore=score;}}
+    if(!best){$('answerText').textContent='Bu soruya hazır bilgi rehberimde uygun bir yanıt bulamadım. Cam şişe, kavanoz, depozito veya geri dönüşüm hakkında sorabilirsin. Aşağıdaki kaynaklardan da yararlanabilirsin.';$('answerSource').hidden=true;return;}
+    $('answerText').textContent=best.text;$('answerSource').hidden=!best.source;if(best.source)$('answerSource').href=sources[best.source];
+  }
+  $('questionForm').addEventListener('submit',e=>{e.preventDefault();answerQuestion($('questionInput').value);});
+  document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>{$('questionInput').value=b.dataset.question;answerQuestion(b.dataset.question);}));
+  
+  /* Telefonda bir seferde yalnızca seçilen oyun gösterilir. */
+  const activityPanels={runner:'parkur',sort:'ayir',quiz:'bilgi'};
+  const activityTabs=[...document.querySelectorAll('[data-game]')];
+  function selectGame(name,focusTab=false){
+    if(name!=='runner'&&phase==='playing')pauseGame();
+    releaseControls();
+    for(const tab of activityTabs){
+      const selected=tab.dataset.game===name;
+      tab.setAttribute('aria-selected',String(selected));
+      tab.tabIndex=selected?0:-1;
+      $(activityPanels[tab.dataset.game]).hidden=!selected;
+      if(selected&&focusTab)tab.focus();
+    }
+    if(name==='runner')draw();
+  }
+  activityTabs.forEach(tab=>tab.addEventListener('click',()=>selectGame(tab.dataset.game)));
+  $('gameTabs').addEventListener('keydown',event=>{
+    const current=activityTabs.indexOf(document.activeElement);
+    if(current<0)return;
+    let target=current;
+    if(event.key==='ArrowRight')target=(current+1)%activityTabs.length;
+    else if(event.key==='ArrowLeft')target=(current-1+activityTabs.length)%activityTabs.length;
+    else if(event.key==='Home')target=0;
+    else if(event.key==='End')target=activityTabs.length-1;
+    else return;
+    event.preventDefault();selectGame(activityTabs[target].dataset.game,true);
+  });
+</script>
+</body>
+</html>
